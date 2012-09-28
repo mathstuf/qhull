@@ -30,7 +30,7 @@
 #   Remove src/libqhullcpp from most of the AdditionalIncludeDirectories
 #   Remove CMAKE_INTDIR from PreprocessorDefinitions
 #   Adjust target names and destinations (e.g., lib/libqhullstatic_d.a)
-#  
+#
 # $Id: //main/2011/qhull/CMakeLists.txt#23 $$Change: 1494 $
 # $DateTime: 2012/02/21 22:41:40 $$Author: bbarber $
 
@@ -143,7 +143,7 @@ set(
         src/libqhull/qh-qhull.htm
         src/libqhull/qh-set.htm
         src/libqhull/qh-stat.htm
-        src/libqhull/qh-user.htm    
+        src/libqhull/qh-user.htm
 )
 
 set(
@@ -216,10 +216,10 @@ set(
 
 set(
     doc_FILES
-        README.txt 
-        REGISTER.txt 
-        Announce.txt 
-        COPYING.txt 
+        README.txt
+        REGISTER.txt
+        Announce.txt
+        COPYING.txt
         index.htm
 )
 
@@ -240,8 +240,11 @@ else()
 endif()
 
 set(
+#    qhull_TARGETS_INSTALL
+#        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP} ${qhull_SHARED} ${qhull_SHAREDP}
+#        qhull rbox qconvex qdelaunay qvoronoi qhalf
     qhull_TARGETS_INSTALL
-        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP} ${qhull_SHARED} ${qhull_SHAREDP}
+        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP}
         qhull rbox qconvex qdelaunay qvoronoi qhalf
 )
 set(
@@ -257,55 +260,55 @@ set(
 # ---------------------------------------
 # Define shared library qhull without qh_QHpointer
 # ---------------------------------------
-
-add_library(${qhull_SHARED} SHARED 
-        ${libqhull_SOURCES}
-        src/libqhull/qhull-exports.def)
-        
-if(qhull_SHARED MATCHES "libqhull")
-   set_target_properties(${qhull_SHARED} PROPERTIES
-        OUTPUT_NAME "qhull")
-endif()
-
-set_target_properties(${qhull_SHARED} PROPERTIES
-    SOVERSION ${qhull_SOVERSION})
-
-if(UNIX)
-    target_link_libraries(${qhull_SHARED} m)
-    if(APPLE)
-        set_target_properties(${qhull_SHARED} PROPERTIES 
-            INSTALL_NAME_DIR "${LIB_INSTALL_DIR}")
-    else()
-        set_target_properties(${qhull_SHARED} PROPERTIES 
-            INSTALL_RPATH "${LIB_INSTALL_DIR}"
-            INSTALL_RPATH_USE_LINK_PATH TRUE
-            BUILD_WITH_INSTALL_RPATH FALSE)
-    endif()
-endif(UNIX)
-
+#
+#add_library(${qhull_SHARED} SHARED
+#        ${libqhull_SOURCES}
+#        src/libqhull/qhull-exports.def)
+#
+#if(qhull_SHARED MATCHES "libqhull")
+#   set_target_properties(${qhull_SHARED} PROPERTIES
+#        OUTPUT_NAME "qhull")
+#endif()
+#
+#set_target_properties(${qhull_SHARED} PROPERTIES
+#    SOVERSION ${qhull_SOVERSION})
+#
+#if(UNIX)
+#    target_link_libraries(${qhull_SHARED} m)
+#    if(APPLE)
+#       set_target_properties(${qhull_SHARED} PROPERTIES
+#            INSTALL_NAME_DIR "${LIB_INSTALL_DIR}")
+#    else()
+#        set_target_properties(${qhull_SHARED} PROPERTIES
+#            INSTALL_RPATH "${LIB_INSTALL_DIR}"
+#            INSTALL_RPATH_USE_LINK_PATH TRUE
+#            BUILD_WITH_INSTALL_RPATH FALSE)
+#    endif()
+#endif(UNIX)
+#
 # ---------------------------------------
 # Define shared library qhull with qh_QHpointer
 # ---------------------------------------
-
-add_library(${qhull_SHAREDP} SHARED 
-        ${libqhull_SOURCES}
-        src/libqhullp/qhull_p-exports.def)
-set_target_properties(${qhull_SHAREDP} PROPERTIES
-    COMPILE_DEFINITIONS "qh_QHpointer"
-    SOVERSION ${qhull_SOVERSION})
-
-if(UNIX)
-    target_link_libraries(${qhull_SHAREDP} m)
-    if(APPLE)
-        set_target_properties(${qhull_SHAREDP} PROPERTIES 
-            INSTALL_NAME_DIR "${LIB_INSTALL_DIR}")
-    else()
-        set_target_properties(${qhull_SHAREDP} PROPERTIES 
-            INSTALL_RPATH "${LIB_INSTALL_DIR}"
-            INSTALL_RPATH_USE_LINK_PATH TRUE
-            BUILD_WITH_INSTALL_RPATH FALSE)
-    endif()
-endif(UNIX)
+#
+#add_library(${qhull_SHAREDP} SHARED
+#        ${libqhull_SOURCES}
+#        src/libqhullp/qhull_p-exports.def)
+#set_target_properties(${qhull_SHAREDP} PROPERTIES
+#    COMPILE_DEFINITIONS "qh_QHpointer"
+#    SOVERSION ${qhull_SOVERSION})
+#
+#if(UNIX)
+#    target_link_libraries(${qhull_SHAREDP} m)
+#    if(APPLE)
+#        set_target_properties(${qhull_SHAREDP} PROPERTIES
+#            INSTALL_NAME_DIR "${LIB_INSTALL_DIR}")
+#    else()
+#        set_target_properties(${qhull_SHAREDP} PROPERTIES
+#            INSTALL_RPATH "${LIB_INSTALL_DIR}"
+#            INSTALL_RPATH_USE_LINK_PATH TRUE
+#            BUILD_WITH_INSTALL_RPATH FALSE)
+#    endif()
+#endif(UNIX)
 
 # ---------------------------------------
 # Define static libraries qhullstatic and qhullstatic_p (qh_QHpointer)
@@ -374,30 +377,30 @@ target_link_libraries(qhalf ${qhull_STATIC})
 # ---------------------------------------
 # Define testqset linked to qset.o and mem.o
 # ---------------------------------------
-
-add_executable(testqset ${testqset_SOURCES})
-
+#
+#add_executable(testqset ${testqset_SOURCES})
+#
 # ---------------------------------------
 # Define user_eg linked to qhull shared library with qh_QHpointer
 # ---------------------------------------
-
-set(user_eg_SOURCES     src/user_eg/user_eg.c)
-
-add_executable(user_eg ${user_eg_SOURCES})
+#
+#set(user_eg_SOURCES     src/user_eg/user_eg.c)
+#
+#add_executable(user_eg ${user_eg_SOURCES})
 # user_eg may be linked to qhull_STATIC if user_eg_DEFINES is removed
-target_link_libraries(user_eg ${qhull_SHAREDP})
-set_target_properties(user_eg PROPERTIES
-    COMPILE_DEFINITIONS "${user_eg_DEFINES}")
-
+#target_link_libraries(user_eg ${qhull_SHAREDP})
+#set_target_properties(user_eg PROPERTIES
+#    COMPILE_DEFINITIONS "${user_eg_DEFINES}")
+#
 # ---------------------------------------
 # Define user_eg2 linked to qhull shared library (e.g., Debian)
 # ---------------------------------------
-
-add_executable(user_eg2 ${user_eg2_SOURCES})
-target_link_libraries(user_eg2 ${qhull_SHARED})
-set_target_properties(user_eg2 PROPERTIES
-    COMPILE_DEFINITIONS "${user_eg2_DEFINES}")
-
+#
+#add_executable(user_eg2 ${user_eg2_SOURCES})
+#arget_link_libraries(user_eg2 ${qhull_SHARED})
+#et_target_properties(user_eg2 PROPERTIES
+#    COMPILE_DEFINITIONS "${user_eg2_DEFINES}")
+#
 # ---------------------------------------
 # Define user_eg3 linked to qhullstatic_p and qhullcpp static library
 # ---------------------------------------
