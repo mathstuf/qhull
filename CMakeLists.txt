@@ -247,13 +247,13 @@ set(
         ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP}
         qhull rbox qconvex qdelaunay qvoronoi qhalf
 )
-set(
-    qhull_TARGETS_TEST
-        user_eg user_eg2 user_eg3 testqset
-)
+#set(
+#    qhull_TARGETS_TEST
+#        user_eg user_eg2 user_eg3 testqset
+#)
 set(
     qhull_TARGETS
-        ${qhull_TARGETS_INSTALL} ${qhull_TARGETS_TEST}
+        ${qhull_TARGETS_INSTALL}
 )
 
 
