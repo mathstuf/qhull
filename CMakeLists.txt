@@ -407,15 +407,15 @@ target_link_libraries(qhalf ${qhull_STATIC})
 
 # libqhullcpp must be before src/libqhull.  The later is not needed.
 # Otherwise get error -- user_eg3.cpp:72: error: aggregate 'orgQhull::Qhull qhull' has incomplete type and cannot be defined
-include_directories(BEFORE ${CMAKE_SOURCE_DIR}/src/libqhullcpp)
-
-set(user_eg3_SOURCES    src/user_eg3/user_eg3.cpp)
-
-add_executable(user_eg3 ${user_eg3_SOURCES})
+#include_directories(BEFORE ${CMAKE_SOURCE_DIR}/src/libqhullcpp)
+#
+#set(user_eg3_SOURCES    src/user_eg3/user_eg3.cpp)
+#
+#add_executable(user_eg3 ${user_eg3_SOURCES})
 # qhull_STATICP must be last, otherwise qh_fprintf,etc. are not loaded from qhull_CPP
-target_link_libraries(user_eg3 ${qhull_CPP} ${qhull_STATICP})
-set_target_properties(user_eg3 PROPERTIES
-    COMPILE_DEFINITIONS "qh_QHpointer")
+#target_link_libraries(user_eg3 ${qhull_CPP} ${qhull_STATICP})
+#set_target_properties(user_eg3 PROPERTIES
+#    COMPILE_DEFINITIONS "qh_QHpointer")
 
 # ---------------------------------------
 # Define install
