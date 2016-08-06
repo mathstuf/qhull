@@ -4,4 +4,4 @@ set(QHULL_INCLUDE_DIRS
     "@CMAKE_INSTALL_PREFIX@/include/libqhull"
     "@CMAKE_INSTALL_PREFIX@/include/libqhullcpp")
 set(QHULL_LIBRARIES
-    @qhull_TARGETS_INSTALL@)
+    @qhull_STATIC@)
