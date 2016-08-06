@@ -240,12 +240,10 @@ else()
 endif()
 
 set(
-#    qhull_TARGETS_INSTALL
-#        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP} ${qhull_SHARED} ${qhull_SHAREDP}
-#        qhull rbox qconvex qdelaunay qvoronoi qhalf
     qhull_TARGETS_INSTALL
+#        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP} ${qhull_SHARED} ${qhull_SHAREDP}
         ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP}
-        qhull rbox qconvex qdelaunay qvoronoi qhalf
+#        qhull rbox qconvex qdelaunay qvoronoi qhalf
 )
 #set(
 #    qhull_TARGETS_TEST
