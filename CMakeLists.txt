@@ -240,12 +240,10 @@ else()
 endif()
 
 set(
-#    qhull_TARGETS_INSTALL
-#        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP} ${qhull_SHARED} ${qhull_SHAREDP}
-#        qhull rbox qconvex qdelaunay qvoronoi qhalf
     qhull_TARGETS_INSTALL
+#        ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP} ${qhull_SHARED} ${qhull_SHAREDP}
         ${qhull_CPP} ${qhull_STATIC} ${qhull_STATICP}
-        qhull rbox qconvex qdelaunay qvoronoi qhalf
+#        qhull rbox qconvex qdelaunay qvoronoi qhalf
 )
 #set(
 #    qhull_TARGETS_TEST
@@ -422,6 +420,7 @@ target_link_libraries(qhalf ${qhull_STATIC})
 # ---------------------------------------
 
 install(TARGETS ${qhull_TARGETS_INSTALL}
+        EXPORT  Qhull-targets
         RUNTIME DESTINATION ${BIN_INSTALL_DIR}
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
@@ -433,3 +432,20 @@ install(FILES html/qhull.man         DESTINATION ${MAN_INSTALL_DIR} RENAME qhull
 install(FILES html/rbox.man          DESTINATION ${MAN_INSTALL_DIR} RENAME rbox.1)
 install(FILES ${doc_FILES}           DESTINATION ${DOC_INSTALL_DIR})
 install(DIRECTORY html/              DESTINATION ${DOC_INSTALL_DIR})
+
+if (WIN32)
+    set(cmakedir cmake)
+else ()
+    set(cmakedir ${LIB_INSTALL_DIR}/cmake/Qhull)
+endif ()
+
+install(
+    EXPORT      Qhull-targets
+    DESTINATION ${cmakedir})
+configure_file(
+    "${CMAKE_SOURCE_DIR}/QhullConfig.cmake.in"
+    "${CMAKE_BINARY_DIR}/QhullConfig.cmake"
+    @ONLY)
+install(
+    FILES       ${CMAKE_BINARY_DIR}/QhullConfig.cmake
+    DESTINATION ${cmakedir})
